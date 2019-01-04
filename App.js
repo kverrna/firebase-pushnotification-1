@@ -9,6 +9,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Alert} from 'react-native';
 import firebase from 'react-native-firebase';
+import type { Notification } from 'react-native-firebase';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,6 +21,14 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   componentDidMount(){
+
+    this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification: Notification) => {
+      // Process your notification as required
+      // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
+  });
+  this.notificationListener = firebase.notifications().onNotification((notification: Notification) => {
+      // Process your notification as required
+  });
 
   //   this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
   //     Alert.alert('Mensagem recebida','uhuu');
@@ -50,9 +59,10 @@ export default class App extends Component<Props> {
       });
   }
 
-  componentWillMount(){
-    
-  }
+  componentWillUnmount() {
+    this.notificationDisplayedListener();
+    this.notificationListener();
+}
   
   render() {
     return (
