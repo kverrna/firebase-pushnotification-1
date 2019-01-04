@@ -20,11 +20,38 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   componentDidMount(){
-    firebase.auth().signInAnonymously()
-    .then((user) => {
-      Alert.alert('Usuario anonimo',user.isAnonymous);
-      console.log(user.isAnonymous);
-    });
+
+  //   this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
+  //     Alert.alert('Mensagem recebida','uhuu');
+  // });
+    // firebase.auth().signInAnonymously()
+    // .then((user) => {
+    //   Alert.alert('Usuario anonimo',`->${user.isAnonymous}`);
+    // }).catch(erro=>{
+    //   Alert.alert('Erro',` erro : ${erro}`);
+    // });
+
+    firebase.messaging().getToken()
+      .then(fcmToken => {
+        if (fcmToken) {
+          console.log(`Token: ${fcmToken}`);
+        } else {
+          Alert.alert('Nao tem token  ','=(');
+        } 
+      });
+
+      firebase.messaging().hasPermission()
+      .then(enabled => {
+        if (enabled) {
+          Alert.alert('Permissoes','Permissoes concedidas');
+        } else {
+          Alert.alert('Permissoes','Permissoes nao concedidas');
+        } 
+      });
+  }
+
+  componentWillMount(){
+    
   }
   
   render() {

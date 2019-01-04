@@ -164,8 +164,9 @@ dependencies {
 //    implementation "com.google.firebase:firebase-functions:16.1.2"
 //    // Cloud Firestore
 //    implementation "com.google.firebase:firebase-firestore:17.1.2"
-//    // Cloud Messaging / FCM
-//    implementation "com.google.firebase:firebase-messaging:17.3.4"
+    // Cloud Messaging / FCM
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
+    implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
 
 }
 
