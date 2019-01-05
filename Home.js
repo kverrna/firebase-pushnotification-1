@@ -43,16 +43,14 @@ class Home extends React.Component {
     //   firebase.notifications().displayNotification(notification);
   });
 
-  this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification: Notification) => {
-      console.log('Mensagem recebida: NotificationDisplayed');
-  });
-
   this.notificationListener = firebase.notifications().onNotification((notification: Notification) => {
       // Process your notification as required
       const { title, body, data } =notification;
       const { channelId } = data;
 
-      console.log(`Mensagem recebida: notification -> [ ${title} ]-[ ${body} ] - idChannel: ${channel.channelId}`);
+
+      Alert.alert('Pagamento Confirmado','O pagamento foi confirmado');
+      console.log(`Mensagem recebida: notification -> [ ${title} ]-[ ${body} ] `);
       
   });
   
